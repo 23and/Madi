@@ -26,7 +26,7 @@ public class MemberDAO{
 		try{
 			Context initContext = new InitialContext();
 			Context envContext = (Context) initContext.lookup("java:/comp/env");
-			source = (DataSource) envContext.lookup("jdbc/oracle");
+			source = (DataSource) envContext.lookup("jdbc/mysql");
 		}catch(NamingException e){
 			e.printStackTrace();
 		}
@@ -85,7 +85,7 @@ public class MemberDAO{
 		
 		try{
 			con = source.getConnection();
-			pstmt = con.prepareStatement("INSERT INTO MEMBER VALUES(SEQ_MEMBER_NUM.NEXTVAL,?,?,?,?,?)");
+			pstmt = con.prepareStatement("INSERT INTO MEMBER VALUES(?,?,?,?,?)");
 			pstmt.setString(1, email);
 			pstmt.setString(2, pw);
 			pstmt.setString(3, name);

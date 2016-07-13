@@ -234,7 +234,8 @@ public class AnalysisOutput implements Cloneable {
     this.source = source;
   }
   
-  public AnalysisOutput clone() throws CloneNotSupportedException {
+  @Override
+public AnalysisOutput clone() throws CloneNotSupportedException {
     AnalysisOutput output = (AnalysisOutput)super.clone();
     
     output.setDinf(this.dinf);
@@ -255,7 +256,8 @@ public class AnalysisOutput implements Cloneable {
     return output;
   }
   
-  public String toString() {
+  @Override
+public String toString() {
     return Utilities.buildOutputString(this);
   }
 }

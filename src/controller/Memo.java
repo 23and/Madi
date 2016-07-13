@@ -18,11 +18,14 @@ import emotionExtractor.EmotionExtractor;
 import emotionExtractor.TendencyCheck;
 
  
- public class Memo extends javax.servlet.http.HttpServlet {
+@SuppressWarnings("serial")
+public class Memo extends javax.servlet.http.HttpServlet {
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		process(request,response);
 	}  	
 	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		process(request,response);
 	}
@@ -72,7 +75,7 @@ import emotionExtractor.TendencyCheck;
 				if(bean.getTendency() != null){
 					emotionResult = TendencyCheck.result(bean.getTendency(), emotionResult);
 				}
-				
+
 				MusicBean music = MusicDAO.selectMusic(emotionResult);
 				if(music == null){
 					response.sendRedirect("error.jsp");

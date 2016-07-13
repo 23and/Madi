@@ -23,7 +23,7 @@ public class MemoDAO{
 		try {
 			Context initContext = new InitialContext();		
 			Context envContext = (Context)initContext.lookup("java:/comp/env");
-			source = (DataSource)envContext.lookup("jdbc/oracle");
+			source = (DataSource)envContext.lookup("jdbc/mysql");
 		} catch (NamingException e) {			
 			e.printStackTrace();
 		}	
@@ -33,7 +33,8 @@ public class MemoDAO{
 		Connection con = null;	
 		PreparedStatement pstmt = null;
 		boolean result = false;
-		String sql = "INSERT INTO MEMO VALUES(SEQ_MEMO_NUM.NEXTVAL,?,?,?,?,?,?,?,SYSDATE,?)";
+		String sql = "INSERT INTO MEMO (MEMBER_NUM, TITLE, CONTENT, HASHTAG1, HASHTAG2, HASHTAG3, BACK, WRITEDAY, MUSIC_NUM) "
+				      + "VALUES(?, ?, ?, ?, ?, ?, ?, SYSDATE(), ?)";
 
 		try {
 			con = source.getConnection();
@@ -65,7 +66,7 @@ public class MemoDAO{
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		MemoBean vo  = null;
-		String sql = "SELECT MEMBER_NUM, TITLE, CONTENT, HASHTAG1, HASHTAG2, HASHTAG3, BACK, TO_CHAR(WRITEDAY,'yyyy/mm/dd hh24:mi:ss'), MUSIC_NUM FROM MEMO WHERE MEMO_NUM = ?";
+		String sql = "SELECT MEMBER_NUM, TITLE, CONTENT, HASHTAG1, HASHTAG2, HASHTAG3, BACK, DATE_FORMAT(WRITEDAY, '%Y-%m-%d'), MUSIC_NUM FROM MEMO WHERE MEMO_NUM = ?";
 
 		try {
 			con = source.getConnection();
@@ -76,7 +77,6 @@ public class MemoDAO{
 			if(rset.next()){
 				vo = new MemoBean(num, rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4), rset.getString(5), rset.getString(6), rset.getString(7), rset.getString(8), rset.getInt(9));
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{

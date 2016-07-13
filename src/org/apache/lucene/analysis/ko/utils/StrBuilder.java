@@ -2289,7 +2289,8 @@ public class StrBuilder implements Cloneable {
    * @param obj  the object to check, null returns false
    * @return true if the builders contain the same characters in the same order
    */
-  public boolean equals(Object obj) {
+  @Override
+public boolean equals(Object obj) {
     if (obj instanceof StrBuilder) {
       return equals((StrBuilder) obj);
     }
@@ -2301,7 +2302,8 @@ public class StrBuilder implements Cloneable {
    *
    * @return a hash code
    */
-  public int hashCode() {
+  @Override
+public int hashCode() {
     char buf[] = buffer;
     int hash = 0;
     for (int i = size - 1; i >= 0; i--) {
@@ -2320,7 +2322,8 @@ public class StrBuilder implements Cloneable {
    *
    * @return the builder as a String
    */
-  public String toString() {
+  @Override
+public String toString() {
     return new String(buffer, 0, size);
   }
 
@@ -2341,7 +2344,8 @@ public class StrBuilder implements Cloneable {
    * @throws CloneNotSupportedException if clone is not supported
    * @since 2.6
    */
-  public Object clone() throws CloneNotSupportedException {
+  @Override
+public Object clone() throws CloneNotSupportedException {
     StrBuilder clone = (StrBuilder)super.clone();
     clone.buffer = new char[buffer.length];
     System.arraycopy(buffer, 0, clone.buffer, 0, buffer.length);
@@ -2402,12 +2406,14 @@ public class StrBuilder implements Cloneable {
     }
 
     /** {@inheritDoc} */
-    public void close() {
+    @Override
+	public void close() {
       // do nothing
     }
 
     /** {@inheritDoc} */
-    public int read() {
+    @Override
+	public int read() {
       if (ready() == false) {
         return -1;
       }
@@ -2415,7 +2421,8 @@ public class StrBuilder implements Cloneable {
     }
 
     /** {@inheritDoc} */
-    public int read(char b[], int off, int len) {
+    @Override
+	public int read(char b[], int off, int len) {
       if (off < 0 || len < 0 || off > b.length ||
           (off + len) > b.length || (off + len) < 0) {
         throw new IndexOutOfBoundsException();
@@ -2435,7 +2442,8 @@ public class StrBuilder implements Cloneable {
     }
 
     /** {@inheritDoc} */
-    public long skip(long n) {
+    @Override
+	public long skip(long n) {
       if (pos + n > StrBuilder.this.size()) {
         n = StrBuilder.this.size() - pos;
       }
@@ -2447,22 +2455,26 @@ public class StrBuilder implements Cloneable {
     }
 
     /** {@inheritDoc} */
-    public boolean ready() {
+    @Override
+	public boolean ready() {
       return pos < StrBuilder.this.size();
     }
 
     /** {@inheritDoc} */
-    public boolean markSupported() {
+    @Override
+	public boolean markSupported() {
       return true;
     }
 
     /** {@inheritDoc} */
-    public void mark(int readAheadLimit) {
+    @Override
+	public void mark(int readAheadLimit) {
       mark = pos;
     }
 
     /** {@inheritDoc} */
-    public void reset() {
+    @Override
+	public void reset() {
       pos = mark;
     }
   }
@@ -2481,37 +2493,44 @@ public class StrBuilder implements Cloneable {
     }
 
     /** {@inheritDoc} */
-    public void close() {
+    @Override
+	public void close() {
       // do nothing
     }
 
     /** {@inheritDoc} */
-    public void flush() {
+    @Override
+	public void flush() {
       // do nothing
     }
 
     /** {@inheritDoc} */
-    public void write(int c) {
+    @Override
+	public void write(int c) {
       StrBuilder.this.append((char) c);
     }
 
     /** {@inheritDoc} */
-    public void write(char[] cbuf) {
+    @Override
+	public void write(char[] cbuf) {
       StrBuilder.this.append(cbuf);
     }
 
     /** {@inheritDoc} */
-    public void write(char[] cbuf, int off, int len) {
+    @Override
+	public void write(char[] cbuf, int off, int len) {
       StrBuilder.this.append(cbuf, off, len);
     }
 
     /** {@inheritDoc} */
-    public void write(String str) {
+    @Override
+	public void write(String str) {
       StrBuilder.this.append(str);
     }
 
     /** {@inheritDoc} */
-    public void write(String str, int off, int len) {
+    @Override
+	public void write(String str, int off, int len) {
       StrBuilder.this.append(str, off, len);
     }
   }

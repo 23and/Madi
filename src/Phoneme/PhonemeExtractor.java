@@ -47,7 +47,7 @@ public class PhonemeExtractor {
 				line.add(JUN[jun]);
 				
 				//종성이 없을수도 있으므로
-				if((char)jon != 0x0000){
+				if(jon != 0x0000){
 					line.add(JON[jon]);					
 				}
 			}

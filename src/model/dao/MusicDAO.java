@@ -11,7 +11,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import model.domain.MemberBean;
 import model.domain.MusicBean;
 
 public class MusicDAO {
@@ -27,7 +26,7 @@ public class MusicDAO {
 		try{
 			Context initContext = new InitialContext();
 			Context envContext = (Context) initContext.lookup("java:/comp/env");
-			source = (DataSource) envContext.lookup("jdbc/oracle");
+			source = (DataSource) envContext.lookup("jdbc/mysql");
 		}catch (NamingException e){
 			e.printStackTrace();
 		}
@@ -37,11 +36,10 @@ public class MusicDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String field = "EMOTION";
 		
 		try{
 			con = source.getConnection();
-			pstmt = con.prepareStatement("SELECT * FROM (SELECT * FROM MUSIC WHERE EMOTION = ? ORDER BY DBMS_RANDOM.VALUE) WHERE ROWNUM = 1");
+			pstmt = con.prepareStatement("SELECT * FROM MUSIC WHERE EMOTION = ? ORDER BY RAND() LIMIT 1");
 			pstmt.setString(1, emotion);
 			rset = pstmt.executeQuery();
 			if (rset.next()) {

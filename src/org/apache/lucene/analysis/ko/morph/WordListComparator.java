@@ -22,7 +22,8 @@ import java.util.List;
 
 public class WordListComparator implements Comparator<WordListCandidate> {
   
-  public int compare(WordListCandidate o1, WordListCandidate o2) {
+  @Override
+public int compare(WordListCandidate o1, WordListCandidate o2) {
     
     int lenC1 = o1.getCorrectLength();
     int lenC2 = o2.getCorrectLength();

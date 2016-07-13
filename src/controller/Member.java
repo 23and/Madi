@@ -12,19 +12,22 @@ import javax.servlet.http.HttpSession;
 import model.dao.MemberDAO;
 import model.domain.MemberBean;
 
+@SuppressWarnings("serial")
 public class Member extends HttpServlet {
 	
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		process(request, response);
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		process(request, response);
 	}
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		request.setCharacterEncoding("euc-kr");
-		String command = (String)request.getParameter("command");
+		String command = request.getParameter("command");
 		String url = null;
 		
 		if(command.equals("signup")){

@@ -3,11 +3,6 @@ package emotionExtractor;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.net.URL;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import Phoneme.PhonemeTextEngine;
 
 

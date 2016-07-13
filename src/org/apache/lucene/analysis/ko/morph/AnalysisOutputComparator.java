@@ -20,7 +20,8 @@ package org.apache.lucene.analysis.ko.morph;
 import java.util.Comparator;
 
 public class AnalysisOutputComparator<T> implements Comparator<T> {
-  public int compare(T o1, T o2) {
+  @Override
+public int compare(T o1, T o2) {
     
     AnalysisOutput out1 = (AnalysisOutput)o1;
     AnalysisOutput out2 = (AnalysisOutput)o2;
